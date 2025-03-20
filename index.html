@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>林冠昀的個人網頁</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            padding: 50px;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+        h1 {
+            color: #333;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        table {
+            margin-top: 20px;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>蔡宇崴</h1>
+        <p>就讀南臺科技大學，五專三年級</p>
+        <p>正在修讀 陳老師的 JavaScript 程式設計課程</p>
+        <button onclick="showMultiplicationTable()">點我一下</button>
+        <p id="message"></p>
+        <div id="tableContainer"></div>
+    </div>
+
+    <script>
+        function showMultiplicationTable() {
+            let n = prompt("請輸入乘法表的大小 (n x n):", "9");
+            n = parseInt(n);
+            if (isNaN(n) || n <= 0) {
+                document.getElementById('message').innerText = "請輸入有效的數字！";
+                return;
+            }
+            document.getElementById('message').innerText = "這是 " + n + " x " + n + " 乘法表：";
+            let tableHTML = "<table>";
+            for (let i = 1; i <= n; i++) {
+                tableHTML += "<tr>";
+                for (let j = 1; j <= n; j++) {
+                    tableHTML += `<td>${i} × ${j} = ${i * j}</td>`;
+                }
+                tableHTML += "</tr>";
+            }
+            tableHTML += "</table>";
+            document.getElementById('tableContainer').innerHTML = tableHTML;
+        }
+    </script>
+</body>
+</html>
