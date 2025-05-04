@@ -1,8 +1,7 @@
 {
   "name": "價格重量換算工具",
   "short_name": "換算工具",
-  "scope": "/williegoodjob.github.io/",
-  "start_url": "/williegoodjob.github.io/",
+  "start_url": "/williegoodjob.github.io/index.html",
   "display": "standalone",
   "background_color": "#f8f9fa",
   "theme_color": "#3498db",
