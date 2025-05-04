@@ -1,0 +1,9 @@
+{
+  "name": "價格重量換算工具",
+  "short_name": "換算工具",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8f9fa",
+  "theme_color": "#3498db",
+  "icons": []
+}
