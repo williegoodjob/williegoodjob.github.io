@@ -1,8 +1,8 @@
-const CACHE_NAME = 'converter-v3';  // 每次更新時改這個版本號
+const CACHE_NAME = 'converter-v4';  // 每次更新時改這個版本號
 const FILES_TO_CACHE = [
-  'index.html',
-  'manifest.json',
-  'sw.js'  // 把自己也加進快取
+  './index.html',
+  './manifest.json',
+  './sw.js'  // 把自己也加進快取
 ];
 
 self.addEventListener('install', event => {
