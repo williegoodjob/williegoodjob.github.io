@@ -1,8 +1,8 @@
 const CACHE_NAME = 'converter-v4';  // 每次更新時改這個版本號
 const FILES_TO_CACHE = [
-  './index.html',
-  './manifest.json',
-  './sw.js'  // 把自己也加進快取
+  '/williegoodjob.github.io/index.html',
+  '/williegoodjob.github.io/manifest.json',
+  '/williegoodjob.github.io/sw.js'  // 把自己也加進快取
 ];
 
 self.addEventListener('install', event => {
