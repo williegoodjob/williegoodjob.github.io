@@ -6,6 +6,12 @@
     <title>價格重量換算工具</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#3498db">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="換算工具">
+    <link rel="apple-touch-icon" href="./icons/icon-192.png">
+
     <style>
         body {
             font-family: 'Segoe UI', '微軟正黑體', sans-serif;
@@ -181,7 +187,6 @@
             <div>🔹 每基準重量價格：<span id="pricePerBase">--</span> 元</div>
         </div>
     </div>
-
     <script>
         function toGram(value, unit) {
             return unit === 'kg' ? value * 1000 : value;
@@ -227,7 +232,13 @@
         );
 
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('./sw.js', { scope: './' });
+            navigator.serviceWorker.register('./sw.js', { scope: './' })
+                .then(registration => {
+                    console.log('ServiceWorker 註冊成功:', registration.scope);
+                })
+                .catch(error => {
+                    console.log('ServiceWorker 註冊失敗:', error);
+                });
         }
 
     </script>
