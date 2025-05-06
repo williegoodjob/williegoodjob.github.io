@@ -1,247 +1,183 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
 
 <head>
-    <meta charset="UTF-8">
-    <title>價格重量換算工具</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="manifest" href="./manifest.json">
-    <meta name="theme-color" content="#3498db">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="換算工具">
-    <link rel="apple-touch-icon" href="./icons/icon-192.png">
-
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>價格計算器</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
-        body {
-            font-family: 'Segoe UI', '微軟正黑體', sans-serif;
-            padding: 1.5em;
-            max-width: 600px;
-            margin: auto;
-            background-color: #f8f9fa;
-            line-height: 1.6;
+        [data-bs-theme="light"] {
+            --bs-body-bg: #f8f9fa;
+            --bs-body-color: #212529;
+            --result-bg: rgba(255, 255, 255, 0.7);
+            --result-border: #dee2e6;
+            --header-bg: rgba(13, 110, 253, 0.1);
         }
-
-        h2 {
-            color: #2c3e50;
-            text-align: center;
-            margin-bottom: 1.5em;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 0.5em;
+    
+        [data-bs-theme="dark"] {
+            --bs-body-bg: #212529;
+            --bs-body-color: #dee2e6;
+            --result-bg: rgba(33, 37, 41, 0.7);
+            --result-border: #495057;
+            --header-bg: rgba(13, 110, 253, 0.2);
         }
-
-        label {
-            display: block;
-            margin: 15px 0 8px;
-            color: #34495e;
-            font-weight: 500;
+        
+        .theme-switch {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 1000;
         }
-
-        input,
-        select {
-            padding: 10px;
-            width: 100%;
-            box-sizing: border-box;
-            border: 2px solid #ddd;
-            border-radius: 6px;
-            font-size: 16px;
-            transition: border-color 0.3s ease;
-        }
-
-        input:focus,
-        select:focus {
-            outline: none;
-            border-color: #3498db;
-        }
-
-        .output {
-            background: linear-gradient(145deg, #ffffff, #f0f0f0);
-            padding: 15px;
-            border-radius: 12px;
-            margin-top: 25px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .output div {
-            margin-bottom: 12px;
-            padding: 8px;
-            border-radius: 4px;
-            background: rgba(255, 255, 255, 0.7);
-        }
-
-        @media (max-width: 480px) {
-            body {
-                padding: 1em;
-            }
-
-            input,
-            select {
-                font-size: 14px;
+        
+        @media (max-width: 768px) {
+            .theme-switch {
+                top: 0.5rem;
+                right: 0.5rem;
             }
         }
 
-        /* 容器樣式 */
-        .container {
-            width: 100%;
-            padding: 20px;
-            box-sizing: border-box;
+        /* 結果卡片樣式 */
+        .result-card {
+            background-color: var(--result-bg);
+            border: 1px solid var(--result-border);
         }
 
-        /* 輸入組樣式 */
-        .input-group {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
+        .card-header {
+            background-color: var(--header-bg) !important;
         }
 
-        .input-group input {
-            flex: 2;
+        [data-bs-theme="dark"] .text-primary {
+            color: #8bb9fe !important;
         }
 
-        .input-group select {
-            flex: 1;
-            max-width: 100px;
-        }
-
-        /* 響應式設計 */
-        @media screen and (max-width: 768px) {
-            body {
-                padding: 1em;
-            }
-
-            h2 {
-                font-size: 1.5em;
-            }
-
-            .input-group {
-                flex-direction: column;
-            }
-
-            .input-group select {
-                max-width: 100%;
-            }
-
-            .output {
-                margin-top: 20px;
-            }
-
-            .output div {
-                font-size: 0.9em;
-            }
-        }
-
-        @media screen and (max-width: 480px) {
-            body {
-                padding: 0.8em;
-            }
-
-            h2 {
-                font-size: 1.3em;
-            }
-
-            input,
-            select {
-                font-size: 14px;
-                padding: 8px;
-            }
-
-            .output div {
-                font-size: 0.85em;
-                padding: 6px;
-            }
+        [data-bs-theme="dark"] .bg-light {
+            background-color: transparent !important;
         }
     </style>
 </head>
 
-<body>
-    <div class="container">
-        <h2>價格重量換算工具</h2>
-
-        <label>總價（元）</label>
-        <input id="price" type="number" step="0.01">
-
-        <label>總重</label>
-        <div class="input-group">
-            <input id="weight" type="number" step="0.1">
-            <select id="weightUnit">
-                <option value="g">g</option>
-                <option value="kg">kg</option>
-            </select>
-        </div>
-
-        <label>數量</label>
-        <input id="quantity" type="number">
-
-        <label>基準重量</label>
-        <div class="input-group">
-            <input id="baseWeight" type="number" value="600">
-            <select id="baseUnit">
-                <option value="g">g</option>
-                <option value="kg">kg</option>
-            </select>
-        </div>
-
-        <div class="output">
-            <div>🔹 每子單位價格：<span id="unitPrice">--</span> 元</div>
-            <div>🔹 每子單位重量：<span id="unitWeight">--</span> g</div>
-            <div>🔹 每基準重量價格：<span id="pricePerBase">--</span> 元</div>
+<body class="py-4">
+    <div class="theme-switch">
+        <div class="btn-group">
+            <button type="button" class="btn btn-outline-primary" data-bs-theme-value="light">
+                <i class="bi bi-sun-fill"></i>
+            </button>
+            <button type="button" class="btn btn-outline-primary" data-bs-theme-value="dark">
+                <i class="bi bi-moon-stars-fill"></i>
+            </button>
+            <button type="button" class="btn btn-outline-primary" data-bs-theme-value="auto">
+                <i class="bi bi-circle-half"></i>
+            </button>
         </div>
     </div>
-    <script>
-        function toGram(value, unit) {
-            return unit === 'kg' ? value * 1000 : value;
-        }
+    <div class="container">
+        <h3 class="mb-4">價格計算工具</h3>
 
-        function update() {
-            const price = parseFloat(document.getElementById("price").value);
-            const weight = parseFloat(document.getElementById("weight").value);
-            const weightUnit = document.getElementById("weightUnit").value;
-            const quantity = parseFloat(document.getElementById("quantity").value);
-            const baseWeight = parseFloat(document.getElementById("baseWeight").value);
-            const baseUnit = document.getElementById("baseUnit").value;
+        <!-- 第一段 -->
+        <div class="card mb-3">
+            <div class="card-body row g-3">
+                <div class="col-md-4">
+                    <label for="price" class="form-label">價格</label>
+                    <div class="input-group">
+                        <input type="number" id="price" class="form-control" />
+                        <span class="input-group-text">元</span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label for="weight" class="form-label">重量</label>
+                    <div class="input-group">
+                        <input type="number" id="weight" class="form-control" />
+                        <select id="WeightUnit" class="form-select">
+                            <option value="g">克</option>
+                            <option value="kg">公斤</option>
+                            <option value="lb">磅</option>
+                            <option value="oz">盎司</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label for="quantity" class="form-label">數量</label>
+                    <div class="input-group">
+                        <input type="number" id="quantity" class="form-control" />
+                        <span class="input-group-text">個</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-            const weightGram = isNaN(weight) ? null : toGram(weight, weightUnit);
-            const baseGram = isNaN(baseWeight) ? 600 : toGram(baseWeight, baseUnit);
+        <!-- 第二段 -->
+        <div class="card mb-3">
+            <div class="card-body row g-3">
+                <div class="col-md-6">
+                    <label class="form-label">基準重量</label>
+                    <div class="input-group">
+                        <input type="number" id="Baseline" value="1" class="form-control" />
+                        <select id="BaselineUnit" class="form-select">
+                            <option value="台斤">台斤</option>
+                            <option value="g">克</option>
+                            <option value="kg">公斤</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="RefPrice" class="form-label">基準價格</label>
+                    <div class="input-group">
+                        <input type="number" id="RefPrice" value="10" class="form-control" />
+                        <span class="input-group-text">元</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-            // 每顆價格
-            let unitPrice = "--";
-            if (!isNaN(price) && !isNaN(quantity) && quantity > 0) {
-                unitPrice = (price / quantity).toFixed(2);
-            }
+        <!-- 結果輸出 -->
+        <div class="card result-card">
+            <div class="card-header bg-primary bg-opacity-10">
+                <h5 class="card-title mb-0">計算結果</h5>
+            </div>
+            <div class="card-body row g-4">
+                <div class="col-md-6">
+                    <div class="p-3 border rounded bg-light bg-opacity-50">
+                        <h6 class="text-primary mb-3" id="PricePerBaselineLabel">每基準單位價格</h6>
+                        <div class="fs-4 fw-bold" id="PricePerBaseline">-- 元</div>
+                    </div>
+                </div>
+        
+                <div class="col-md-6">
+                    <div class="p-3 border rounded bg-light bg-opacity-50">
+                        <h6 class="text-primary mb-3" id="WeightPerPriceLabel">每元可得</h6>
+                        <div class="fs-4 fw-bold" id="WeightPerPrice">--</div>
+                        <div class="text-muted small" id="QuantiyPerPrice">--</div>
+                    </div>
+                </div>
+        
+                <div class="col-md-6">
+                    <div class="p-3 border rounded bg-light bg-opacity-50">
+                        <h6 class="text-primary mb-3">每單位重量</h6>
+                        <div class="d-flex align-items-center gap-2">
+                            <div class="fs-4 fw-bold" id="WeightPerQuantity">--</div>
+                            <select id="WeightPerQuantityUnit" class="form-select form-select-sm w-auto">
+                                <option value="g">克</option>
+                                <option value="kg">公斤</option>
+                                <option value="台斤">台斤</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="col-md-6">
+                    <div class="p-3 border rounded bg-light bg-opacity-50">
+                        <h6 class="text-primary mb-3">每單位價格</h6>
+                        <div class="fs-4 fw-bold" id="PricePerQuantity">-- 元</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-            // 每顆重量
-            let unitWeight = "--";
-            if (!isNaN(weightGram) && !isNaN(quantity) && quantity > 0) {
-                unitWeight = (weightGram / quantity).toFixed(1);
-            }
-
-            // 每基準重量價格
-            let pricePerBase = "--";
-            if (!isNaN(price) && !isNaN(weightGram) && weightGram > 0 && baseGram > 0) {
-                const pricePerGram = price / weightGram;
-                pricePerBase = (pricePerGram * baseGram).toFixed(2);
-            }
-
-            document.getElementById("unitPrice").textContent = unitPrice;
-            document.getElementById("unitWeight").textContent = unitWeight;
-            document.getElementById("pricePerBase").textContent = pricePerBase;
-        }
-
-        document.querySelectorAll("input, select").forEach(el =>
-            el.addEventListener("input", update)
-        );
-
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('./sw.js', { scope: './' })
-                .then(registration => {
-                    console.log('ServiceWorker 註冊成功:', registration.scope);
-                })
-                .catch(error => {
-                    console.log('ServiceWorker 註冊失敗:', error);
-                });
-        }
-
-    </script>
+    <script src="calc.js"></script>
+    <script src="themeSW.js"></script>
 </body>
 
 </html>

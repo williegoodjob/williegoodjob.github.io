@@ -1,9 +1,11 @@
-const CACHE_NAME = 'converter-v6';
+const CACHE_NAME = 'converter-v7';
 const REPO_NAME = '/williegoodjob.github.io'; // 改成你的 repo 名稱
 
 const FILES_TO_CACHE = [
   `${REPO_NAME}/`,
   `${REPO_NAME}/index.html`,
+  `${REPO_NAME}/calc.js`,
+  `${REPO_NAME}/themeSW.js`,
   `${REPO_NAME}/manifest.json`,
   `${REPO_NAME}/sw.js`,
   `${REPO_NAME}/icons/icon-192.png`,
