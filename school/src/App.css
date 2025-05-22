@@ -1,8 +1,9 @@
 #root {
-  max-width: 1280px;
+  max-width: 100%;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0;
   text-align: center;
+  width: 100%;
 }
 
 .logo {
@@ -105,8 +106,8 @@
 
 /* 內容容器，防止被固定導航欄覆蓋 */
 .content-container {
-  margin-top: 5rem;
-  padding: 1rem 2rem;
+  margin-top: 4rem; /* 調整為導航欄的高度加上一些小間距 */
+  padding: 0 2rem; /* 減少頂部內邊距 */
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;

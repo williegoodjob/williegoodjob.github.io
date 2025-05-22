@@ -1,8 +1,8 @@
 function About() {
   return (
     <div>
-      <h2>關於我們</h2>
-      <p>這是關於頁面</p>
+      <h2>五專資工三甲</h2>
+      <p>期末測驗</p>
     </div>
   );
 }
