@@ -15,7 +15,7 @@
             --result-border: #dee2e6;
             --header-bg: rgba(13, 110, 253, 0.1);
         }
-    
+
         [data-bs-theme="dark"] {
             --bs-body-bg: #212529;
             --bs-body-color: #dee2e6;
@@ -23,14 +23,14 @@
             --result-border: #495057;
             --header-bg: rgba(13, 110, 253, 0.2);
         }
-        
+
         .theme-switch {
             position: fixed;
             top: 1rem;
             right: 1rem;
             z-index: 1000;
         }
-        
+
         @media (max-width: 768px) {
             .theme-switch {
                 top: 0.5rem;
@@ -143,7 +143,7 @@
                         <div class="fs-4 fw-bold" id="PricePerBaseline">-- 元</div>
                     </div>
                 </div>
-        
+
                 <div class="col-md-6">
                     <div class="p-3 border rounded bg-light bg-opacity-50">
                         <h6 class="text-primary mb-3" id="WeightPerPriceLabel">每元可得</h6>
@@ -151,7 +151,7 @@
                         <div class="text-muted small" id="QuantiyPerPrice">--</div>
                     </div>
                 </div>
-        
+
                 <div class="col-md-6">
                     <div class="p-3 border rounded bg-light bg-opacity-50">
                         <h6 class="text-primary mb-3">每單位重量</h6>
@@ -165,7 +165,7 @@
                         </div>
                     </div>
                 </div>
-        
+
                 <div class="col-md-6">
                     <div class="p-3 border rounded bg-light bg-opacity-50">
                         <h6 class="text-primary mb-3">每單位價格</h6>
@@ -178,6 +178,16 @@
 
     <script src="calc.js"></script>
     <script src="themeSW.js"></script>
+    <script>
+        // 在 </body> 之前加入
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(reg => console.log('Service Worker 註冊成功', reg.scope))
+                    .catch(err => console.log('Service Worker 註冊失敗', err));
+            });
+        }
+    </script>
 </body>
 
 </html>
