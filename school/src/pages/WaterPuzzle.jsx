@@ -1,5 +1,5 @@
-import { useEffect, useRef } from 'react';
-import './WaterPuzzle.css';
+import { useEffect, useRef } from "react";
+import "./WaterPuzzle.css";
 
 function WaterPuzzle() {
   const gameContainerRef = useRef(null);
@@ -13,7 +13,7 @@ function WaterPuzzle() {
     const levelSelect = levelSelectRef.current;
     const levelCountElement = levelCountRef.current;
     const completedTubesCountElement = completedTubesCountRef.current;
-    
+
     const colors = [
       "red",
       "blue",
@@ -36,7 +36,7 @@ function WaterPuzzle() {
       "olive",
       "coral",
     ];
-    
+
     const tubes = [];
     let selectedTube = null;
     let levelCount = 1;
@@ -71,7 +71,11 @@ function WaterPuzzle() {
       });
       completedTubesCountElement.textContent = completedTubes;
 
-      if (tubes.every((tube) => tube.childElementCount === 0 || allSameColor(tube))) {
+      if (
+        tubes.every(
+          (tube) => tube.childElementCount === 0 || allSameColor(tube)
+        )
+      ) {
         if (levelCount === 10) {
           alert("恭喜!你已經完成所有挑戰!!");
         } else {
@@ -146,56 +150,63 @@ function WaterPuzzle() {
         gameContainer.appendChild(emptyTube);
         tubes.push(emptyTube);
       }
-    }    function fillTubes() {      // 檢查試管中的水是否已經是完成狀態的輔助函數
+    }
+    function fillTubes() {
+      // 檢查試管中的水是否已經是完成狀態的輔助函數
       function isInitialStateCompleted(blocks) {
         if (!blocks || blocks.length === 0) return false;
-        
+
         // 檢查每個試管是否都是單一顏色的水
         const allSameColor = (tubeWaters) => {
           if (tubeWaters.length !== 4) return false;
           const firstColor = tubeWaters[0];
-          return tubeWaters.every(water => water === firstColor);
+          return tubeWaters.every((water) => water === firstColor);
         };
-        
+
         // 檢查每個試管是否完全是單一顏色或完全為空
         const tubeContents = [];
-        
+
         // 收集每個試管中水的顏色配置
         for (let i = 0; i < levelCount + 1; i++) {
           const tubeColors = [];
-          for (let j = (i * 4); j < (i * 4) + 4 && j < blocks.length; j++) {
+          for (let j = i * 4; j < i * 4 + 4 && j < blocks.length; j++) {
             tubeColors.push(blocks[j]);
           }
           tubeContents.push(tubeColors);
         }
-          // 檢查是否所有試管都已完成（單一顏色）或是否存在顏色混合
-        const completedStatus = tubeContents.every(tubeColors => 
-          tubeColors.length === 0 || allSameColor(tubeColors)
+        // 檢查是否所有試管都已完成（單一顏色）或是否存在顏色混合
+        const completedStatus = tubeContents.every(
+          (tubeColors) => tubeColors.length === 0 || allSameColor(tubeColors)
         );
-        
+
         // 如果還有空試管但其他試管都是單色，則也算作完成
-        const nonEmptyTubes = tubeContents.filter(tubeColors => tubeColors.length > 0);
-        const singleColorCompleted = nonEmptyTubes.every(tubeColors => 
+        const nonEmptyTubes = tubeContents.filter(
+          (tubeColors) => tubeColors.length > 0
+        );
+        const singleColorCompleted = nonEmptyTubes.every((tubeColors) =>
           allSameColor(tubeColors)
         );
-        
+
         return completedStatus || singleColorCompleted;
       }
-      
-      const gameColors = colors.slice(0, Math.min(levelCount + 1, colors.length));
+
+      const gameColors = colors.slice(
+        0,
+        Math.min(levelCount + 1, colors.length)
+      );
       const waterBlocks = [];
 
       gameColors.forEach((color) => {
         for (let i = 0; i < 4; i++) {
           waterBlocks.push(color);
         }
-      });      // 打亂水塊顏色並檢查初始狀態
+      }); // 打亂水塊顏色並檢查初始狀態
       let attempts = 0;
       const maxAttempts = 10; // 最多嘗試10次，避免無限循環
-        do {
+      do {
         waterBlocks.sort(() => 0.5 - Math.random());
         attempts++;
-        
+
         // 記錄除錯信息
         if (isInitialStateCompleted(waterBlocks)) {
           console.log(`嘗試 ${attempts}: 仍然是完成狀態，重新打亂`);
@@ -203,26 +214,26 @@ function WaterPuzzle() {
           console.log(`嘗試 ${attempts}: 成功打亂成未完成狀態`);
         }
       } while (isInitialStateCompleted(waterBlocks) && attempts < maxAttempts);
-        // 如果多次嘗試後仍然是完成狀態，使用更複雜的打亂方法
+      // 如果多次嘗試後仍然是完成狀態，使用更複雜的打亂方法
       if (attempts >= maxAttempts) {
         console.log("警告：無法生成未完成的初始狀態，使用更強制的打亂方法");
-        
+
         // 更徹底的打亂策略 - 將不同顏色的水打散在不同試管中
         const shuffledWaterBlocks = [];
-        
+
         // 將每種顏色的水分開存儲
         const colorGroups = {};
-        waterBlocks.forEach(color => {
+        waterBlocks.forEach((color) => {
           if (!colorGroups[color]) {
             colorGroups[color] = [];
           }
           colorGroups[color].push(color);
         });
-        
+
         // 交錯放置不同顏色，確保每個試管都有混合顏色
         const colorKeys = Object.keys(colorGroups);
         let currentColorIndex = 0;
-        
+
         while (shuffledWaterBlocks.length < waterBlocks.length) {
           const currentColor = colorKeys[currentColorIndex % colorKeys.length];
           if (colorGroups[currentColor].length > 0) {
@@ -230,7 +241,7 @@ function WaterPuzzle() {
           }
           currentColorIndex++;
         }
-        
+
         // 將打亂後的水塊替換原來的
         for (let i = 0; i < waterBlocks.length; i++) {
           waterBlocks[i] = shuffledWaterBlocks[i];
@@ -279,8 +290,18 @@ function WaterPuzzle() {
     <div className="water-puzzle-container">
       <h1>2025 Water Puzzle Game</h1>
       <div id="game-info" className="game-area">
-        <p>關卡：<span id="level-count" ref={levelCountRef}>1</span></p>
-        <p>完成的試管：<span id="completed-tubes-count" ref={completedTubesCountRef}>0</span></p>
+        <p>
+          關卡：
+          <span id="level-count" ref={levelCountRef}>
+            1
+          </span>
+        </p>
+        <p>
+          完成的試管：
+          <span id="completed-tubes-count" ref={completedTubesCountRef}>
+            0
+          </span>
+        </p>
       </div>
       <div id="controls" className="game-area">
         <label htmlFor="level-select">選擇關卡</label>
@@ -298,7 +319,11 @@ function WaterPuzzle() {
         </select>
         <button id="play-button">PLAY</button>
       </div>
-      <div id="game-container" ref={gameContainerRef} className="game-area"></div>
+      <div
+        id="game-container"
+        ref={gameContainerRef}
+        className="game-area"
+      ></div>
     </div>
   );
 }
