@@ -1,0 +1,87 @@
+.water-puzzle-container {
+  background-color: antiquewhite;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  border: 1px dashed blue;
+  border-radius: 20px;
+  margin: 20px 0;
+  padding: 20px;
+}
+
+.game-area {
+  width: 80%;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 5px;
+}
+
+#game-info {
+  background-color: burlywood;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+#controls {
+  background-color: darkgrey;
+}
+
+#game-container {
+  background-color: gainsboro;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.tube {
+  width: 50px;
+  height: 200px;
+  border: 2px solid black;
+  border-top: 0px;
+  border-radius: 0 0 10px 10px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column-reverse;
+  overflow: hidden;
+  margin-top: 20px;
+  background-color: rgba(255, 255, 255, 0.5);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.water {
+  width: 100%;
+}
+
+.tube.selected {
+  border-color: red;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+  transform: translateY(-20px);
+}
+
+/* 調整按鈕樣式 */
+#play-button {
+  padding: 8px 16px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 10px;
+  font-weight: bold;
+}
+
+#play-button:hover {
+  background-color: #45a049;
+}
+
+/* 調整選擇框樣式 */
+#level-select {
+  padding: 6px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  margin: 0 10px;
+}

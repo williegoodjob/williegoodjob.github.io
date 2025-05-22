@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Outlet, Link } from 'react-router-dom'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -8,26 +9,27 @@ function App() {
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      {/* 固定頂部導航菜單 */}
+      <nav className="top-navbar">
+        <div className="nav-container">
+          <div className="nav-logo">
+            <img src={reactLogo} alt="React logo" className="nav-logo-img" />
+            <span>JavaScript程式設計</span>
+          </div>
+          
+          <ul className="nav-links">
+            <li><Link to="/" className="nav-link">首頁</Link></li>
+            <li><Link to="/waterpuzzle" className="nav-link">水管拼圖</Link></li>
+            <li><Link to="/about" className="nav-link">關於</Link></li>
+          </ul>
+        </div>
+      </nav>
+      
+      {/* 內容區域，增加頂部間距避免被導航欄覆蓋 */}
+      <div className="content-container">
+        <Outlet />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      
     </>
   )
 }
