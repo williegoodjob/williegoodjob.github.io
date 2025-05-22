@@ -1,0 +1,42 @@
+/* 頁面樣式 - 暗色主題 */
+.react-app-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  color: #e0e0e0;
+}
+
+.react-app-container h1, 
+.react-app-container h2 {
+  color: #61dafb;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.app-section {
+  margin-bottom: 40px;
+  background-color: #1a1a2e;
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  border: 1px solid #333;
+}
+
+.sliders-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* 響應式設計 */
+@media (max-width: 600px) {
+  .react-app-container {
+    padding: 10px;
+  }
+  
+  .app-section {
+    padding: 15px;
+  }
+}

@@ -19,6 +19,7 @@ function App() {
           <ul className="nav-links">
             <li><Link to="/" className="nav-link">首頁</Link></li>
             <li><Link to="/waterpuzzle" className="nav-link">顏色排序解謎</Link></li>
+            <li><Link to="/reactapp" className="nav-link">React應用</Link></li>
             <li><Link to="/about" className="nav-link">關於</Link></li>
           </ul>
         </div>

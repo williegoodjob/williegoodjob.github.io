@@ -1,0 +1,42 @@
+/* MySlider 樣式 - 暗色主題 */
+input[type=range] {
+  -webkit-appearance: none;
+  width: 70%;
+  height: 8px;
+  border-radius: 4px;
+  background: #333;
+  outline: none;
+  margin-right: 10px;
+  box-shadow: inset 0 0 3px rgba(0,0,0,0.5);
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #61dafb;
+  cursor: pointer;
+  box-shadow: 0 0 3px rgba(0,0,0,0.5);
+}
+
+input[type=range]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #61dafb;
+  cursor: pointer;
+  box-shadow: 0 0 3px rgba(0,0,0,0.5);
+}
+
+span {
+  background-color: #2c3e50;
+  color: #61dafb;
+  font-size: medium;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  display: inline-block;
+  min-width: 40px;
+  text-align: center;
+}

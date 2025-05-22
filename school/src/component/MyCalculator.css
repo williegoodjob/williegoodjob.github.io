@@ -1,0 +1,95 @@
+/* MyCalculator 整體外觀 - 暗色主題 */
+.my-calculator-container {
+  max-width: 340px;
+  margin: 40px auto;
+  border: 2px solid #444;
+  border-radius: 16px;
+  padding: 24px;
+  background: #2a2a2a;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  color: #e0e0e0;
+}
+
+/* MyDisplay 外觀 - 暗色主題 */
+.my-calculator-display {
+  background: #1a1a1a;
+  color: #61dafb;
+  border-radius: 8px;
+  padding: 16px;
+  min-height: 48px;
+  margin-bottom: 12px;
+  text-align: right;
+  font-size: 1.5em;
+  word-break: break-all;
+  border: 1px solid #444;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+}
+.my-calculator-display .expression {
+  opacity: 0.8;
+  font-size: 1em;
+  color: #a0d8ef;
+}
+.my-calculator-display .result {
+  font-weight: bold;
+  font-size: 1.2em;
+  color: #61dafb;
+}
+
+/* MyKeypad 外觀 */
+.my-calculator-keypad {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.my-calculator-keypad-row {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin: 8px 0;
+}
+
+/* MyButton 外觀 - 暗色主題 */
+.my-calculator-btn {
+  font-size: 1.2em;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  margin: 4px;
+  transition: all 0.2s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.my-calculator-btn.number {
+  background: #3a3a3a;
+  color: #e0e0e0;
+  border: 1px solid #555;
+}
+.my-calculator-btn.number:hover {
+  background: #4a4a4a;
+  box-shadow: 0 0 5px rgba(97, 218, 251, 0.5);
+}
+
+.my-calculator-btn.operator {
+  background: #005577;
+  color: #61dafb;
+  border: 1px solid #0077aa;
+}
+.my-calculator-btn.operator:hover {
+  background: #006688;
+  box-shadow: 0 0 8px rgba(97, 218, 251, 0.7);
+}
+
+.my-calculator-btn.control {
+  background: #444444;
+  color: #aaaaaa;
+  border: 1px solid #555;
+}
+.my-calculator-btn.control:hover {
+  background: #555555;
+  box-shadow: 0 0 5px rgba(170, 170, 170, 0.5);
+}
