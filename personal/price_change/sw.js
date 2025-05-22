@@ -1,15 +1,18 @@
-const CACHE_NAME = 'converter-v7';
+const CACHE_NAME = 'converter-v8';
 const REPO_NAME = '/williegoodjob.github.io'; // 改成你的 repo 名稱
+const PROJECT_TYPE = 'personal'; // 改成你的專案類型
+const PROJECT_NAME = 'price_change'; // 改成你的專案名稱
+const WEB_ROOT = `${REPO_NAME}/${PROJECT_TYPE}/${PROJECT_NAME}/`; // 網頁根目錄
 
 const FILES_TO_CACHE = [
-  `${REPO_NAME}/`,
-  `${REPO_NAME}/index.html`,
-  `${REPO_NAME}/calc.js`,
-  `${REPO_NAME}/themeSW.js`,
-  `${REPO_NAME}/manifest.json`,
-  `${REPO_NAME}/sw.js`,
-  `${REPO_NAME}/icons/icon-192.png`,
-  `${REPO_NAME}/icons/icon-512.png`
+  `${WEB_ROOT}`,
+  `${WEB_ROOT}index.html`,
+  `${WEB_ROOT}calc.js`,
+  `${WEB_ROOT}themeSW.js`,
+  `${WEB_ROOT}manifest.json`,
+  `${WEB_ROOT}sw.js`,
+  `${WEB_ROOT}icons/icon-192.png`,
+  `${WEB_ROOT}icons/icon-512.png`
 ];
 
 self.addEventListener('install', event => {
@@ -37,7 +40,7 @@ self.addEventListener('fetch', event => {
     event.respondWith(
       caches.match(event.request)
         .then(response => response || fetch(event.request))
-        .catch(() => caches.match(`${REPO_NAME}/index.html`))
+        .catch(() => caches.match(`${WEB_ROOT}index.html`))
     );
   }
 });
